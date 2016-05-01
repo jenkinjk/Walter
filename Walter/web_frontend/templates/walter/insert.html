@@ -1,0 +1,30 @@
+{{ added_message }}
+<div id="content" class="colM">
+  <h1>Add sugar table</h1>
+  <div id="content-main">
+    <form enctype="multipart/form-data" action="" method="post" id="sugartable_form" novalidate="">
+      <input type="hidden" name="csrfmiddlewaretoken" value="LwlXIJc2KTqa5EW8zLc7JBFR2TQdFj82">
+      <div>
+        <fieldset class="module aligned ">
+          <div class="form-row field-username">
+            <div>
+              <label class="required" for="id_username">Username:</label>
+              <input class="vTextField" id="id_username" maxlength="40" name="username" type="text">
+            </div>
+          </div>
+          <div class="form-row field-blood_sugar">
+            <div>
+              <label class="required" for="id_blood_sugar">Blood sugar:</label>
+              <input id="id_blood_sugar" name="blood_sugar" step="0.01" type="number">
+            </div>
+          </div>
+        </fieldset>
+        <div class="submit-row">
+          <input type="submit" value="Save" class="default" name="_save">
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<a href='..'>Go back</a>

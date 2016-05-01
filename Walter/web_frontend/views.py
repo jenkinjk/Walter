@@ -7,3 +7,17 @@ def index(request):
     template = loader.get_template('walter/index.html')
     context = {}
     return HttpResponse(template.render(context, request))
+
+def history(request):
+    return HttpResponse('here is your history')
+
+def insert(request):
+    context = {}
+    if request.method == 'POST':
+        # do stuff
+        context = {
+            'added_message': "I added you to the database (promise)"
+        }
+
+
+    return render(request, 'walter/insert.html', context)
