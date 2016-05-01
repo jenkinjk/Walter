@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 
+from .models import SugarTable
+
 # Create your views here.
 def index(request):
     template = loader.get_template('walter/index.html')
@@ -9,7 +11,13 @@ def index(request):
     return HttpResponse(template.render(context, request))
 
 def history(request):
-    return HttpResponse('here is your history')
+    user = 'jonathan_sux'
+    user_info = SugarTable.objects.filter(username=user).order_by('-timestamp')
+    context = {
+        'user_info': user_info
+    }
+
+    return render(request, 'walter/history.html', context)
 
 def insert(request):
     context = {}

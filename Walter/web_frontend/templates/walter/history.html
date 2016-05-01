@@ -1,0 +1,15 @@
+<table>
+  <tr>
+    <td>Blood Sugar</td>
+    <td>Timestamp</td>
+  </tr>
+
+  {% for sugar in user_info %}
+    <tr>
+      <td>{{ sugar.blood_sugar }}</td>
+      <td>{{ sugar.timestamp }}</td>
+    </tr>
+  {% endfor %}
+
+</table>
+<a href='..'>Go back</a>
