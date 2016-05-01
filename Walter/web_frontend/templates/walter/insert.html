@@ -1,17 +1,18 @@
-{{ added_message }}
+{% if added_message %}
+  <p><strong>{{ added_message }}</strong></p>
+{% endif %}
+
+{% if error_message %}
+  <p><strong>{{ error_message }}</strong></p>
+{% endif %}
+
 <div id="content" class="colM">
-  <h1>Add sugar table</h1>
+  <h1>Add blood sugar reading</h1>
   <div id="content-main">
     <form enctype="multipart/form-data" action="" method="post" id="sugartable_form" novalidate="">
-      <input type="hidden" name="csrfmiddlewaretoken" value="LwlXIJc2KTqa5EW8zLc7JBFR2TQdFj82">
+      {% csrf_token %}
       <div>
         <fieldset class="module aligned ">
-          <div class="form-row field-username">
-            <div>
-              <label class="required" for="id_username">Username:</label>
-              <input class="vTextField" id="id_username" maxlength="40" name="username" type="text">
-            </div>
-          </div>
           <div class="form-row field-blood_sugar">
             <div>
               <label class="required" for="id_blood_sugar">Blood sugar:</label>

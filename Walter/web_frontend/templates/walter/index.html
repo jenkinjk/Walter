@@ -1,3 +1,8 @@
 <a href='insert'>Add a new reading</a> <br>
 
-<a href='history'>View blood sugar history</a>
+<a href='history'>View blood sugar history</a> <br>
+
+<form action="" method="POST">
+  {% csrf_token %}
+  <input type="submit" value="Logout">
+</form>
