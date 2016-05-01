@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+ADMINS = [('JJ', 'jenkinjk@rose-hulman.edu'), ('AM', 'millera4@rose-hulman.edu'), ('KS', 'schmidkl@rose-hulman.edu')]
+
 
 # Application definition
 

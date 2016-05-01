@@ -1,2 +1,4 @@
 # Ignore authorization file
 **/auth.py
+
+**.pyc
