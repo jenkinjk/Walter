@@ -33,6 +33,7 @@ ADMINS = [('JJ', 'jenkinjk@rose-hulman.edu'), ('AM', 'millera4@rose-hulman.edu')
 # Application definition
 
 INSTALLED_APPS = [
+    'web_frontend.apps.WebFrontendConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

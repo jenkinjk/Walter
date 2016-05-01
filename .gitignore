@@ -1,4 +1,8 @@
 # Ignore authorization file
 **/auth.py
 
+# Ignore python c files
 **.pyc
+
+# Ignore database
+**.sqlite3
