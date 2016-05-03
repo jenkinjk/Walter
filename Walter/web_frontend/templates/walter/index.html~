@@ -9,19 +9,12 @@
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <body>
-<table>
-  <tr>
-    <td>Blood Sugar</td>
-    <td>Timestamp</td>
-  </tr>
+<a href='insert' class="btn btn-default">Add a new reading</a> <br>
 
-  {% for sugar in user_info %}
-    <tr>
-      <td>{{ sugar.blood_sugar }}</td>
-      <td>{{ sugar.timestamp }}</td>
-    </tr>
-  {% endfor %}
+<a href='history' class = "btn btn-default">View blood sugar history</a> <br>
 
-</table>
-<a href='..' class="btn btn-default">Go back</a>
+<form action="" method="POST" class = "btn btn-default">
+  {% csrf_token %}
+  <input type="submit" value="Logout">
+</form>
 </body>

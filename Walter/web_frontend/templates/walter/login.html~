@@ -18,7 +18,7 @@
 {% endif %}
 
 <div id="content" class="colM">
-  <h1>Register</h1>
+  <h1>Login</h1>
   <div id="content-main">
     <form enctype="multipart/form-data" action="" method="post" id="register" novalidate="">
       {% csrf_token %}
@@ -30,34 +30,20 @@
               <input class="vTextField" id="id_username" maxlength="40" name="username" type="text">
             </div>
           </div>
-          <div class="form-row field-email">
-            <div>
-              <label class="required" for="id_email">Email:</label>
-              <input id="id_email" name="email" type="email">
-            </div>
-          </div>
           <div class="form-row field-password">
             <div>
               <label class="required" for="id_password">Password:</label>
               <input id="id_password" name="password" type="password">
             </div>
           </div>
-          <div class="form-row field-password">
-            <div>
-              <label class="required" for="id_password2">Re-enter Password:</label>
-              <input id="id_password2" name="password2" type="password">
-            </div>
-          </div>
         </fieldset>
         <div class="submit-row">
-          <input type="submit" value="Save" class="btn btn-default" name="_save">
+          <input type="submit" value="Login" class="default" name="_save">
         </div>
       </div>
     </form>
   </div>
 </div>
 
-<a href='../login' class = "btn btn-default">Go back</a>
-
-
+<a href='../register' class = "btn btn-default">Register an account</a>
 </body>

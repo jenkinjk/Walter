@@ -1,8 +1,20 @@
-<a href='insert'>Add a new reading</a> <br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+<a href='insert' class="btn btn-default">Add a new reading</a> <br>
 
-<a href='history'>View blood sugar history</a> <br>
+<a href='history' class = "btn btn-default">View blood sugar history</a> <br>
 
 <form action="" method="POST">
   {% csrf_token %}
-  <input type="submit" value="Logout">
+  <input type="submit" class = "btn btn-default" value="Logout">
 </form>
+</body>

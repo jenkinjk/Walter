@@ -16,6 +16,11 @@
 {% if error_message %}
   <p><strong>{{ error_message }}</strong></p>
 {% endif %}
+div.colM {
+    vertical-align: middle;
+    min-height: 10em;
+    horizontal-align: middle;
+}
 <div id="content" class="colM">
   <h1>Add blood sugar reading</h1>
   <div id="content-main">

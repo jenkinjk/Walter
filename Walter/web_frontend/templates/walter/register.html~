@@ -59,5 +59,9 @@
 
 <a href='../login' class = "btn btn-default">Go back</a>
 
+background-image: url("blood_sugar_measuring_device.png");
+    background-repeat: no-repeat;
+    background-position: right top;
+    background-attachment: fixed;
 
 </body>
