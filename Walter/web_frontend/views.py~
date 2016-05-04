@@ -56,6 +56,7 @@ def register(request):
         else:
             user = User.objects.create_user(post_data['username'], post_data['email'], post_data['password'])
             user.save()
+            user = authenticate(username=post_data['username'], password=post_data['password'])
             login(request, user)
 
             added_message = 'You have been registered!'

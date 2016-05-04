@@ -1,14 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-</head>
-<body>
+{% load staticfiles %}
+<link rel = "stylesheet" type = "text/css" href = "{% static 'Walter/style.css' %}" />
 {% if added_message %}
   <p><strong>{{ added_message }}</strong></p>
 {% endif %}
@@ -50,18 +42,11 @@
           </div>
         </fieldset>
         <div class="submit-row">
-          <input type="submit" value="Save" class="btn btn-default" name="_save">
+          <input type="submit" value="Save" class="button" name="_save">
         </div>
       </div>
     </form>
   </div>
 </div>
 
-<a href='../login' class = "btn btn-default">Go back</a>
-
-background-image: url("blood_sugar_measuring_device.png");
-    background-repeat: no-repeat;
-    background-position: right top;
-    background-attachment: fixed;
-
-</body>
+<a href='../login' class = "button">Go back</a>

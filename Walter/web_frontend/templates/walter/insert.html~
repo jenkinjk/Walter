@@ -1,14 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-</head>
-<body>
+{% load staticfiles %}
+<link rel = "stylesheet" type = "text/css" href = "{% static 'Walter/style.css' %}" />
 {% if added_message %}
   <p><strong>{{ added_message }}</strong></p>
 {% endif %}
@@ -16,39 +8,27 @@
 {% if error_message %}
   <p><strong>{{ error_message }}</strong></p>
 {% endif %}
-div.colM {
-    vertical-align: middle;
-    min-height: 10em;
-    horizontal-align: middle;
-}
 <div id="content" class="colM">
-  <h1>Add blood sugar reading</h1>
+  <h1 align = "center">Add Blood Sugar Reading</h1>
   <div id="content-main">
     <form enctype="multipart/form-data" action="" method="post" id="sugartable_form" novalidate="">
       {% csrf_token %}
       <div>
-        <fieldset class="module aligned ">
+        <fieldset>
           <div class="form-row field-blood_sugar">
             <div>
-              <label class="required" for="id_blood_sugar">Blood sugar:</label>
-              <input id="id_blood_sugar" name="blood_sugar" step="0.01" type="number">
+              <label class="required" for="id_blood_sugar" font-size: "30px">Blood sugar:</label>
+              <input id="id_blood_sugar" name="blood_sugar" step="0.1" type="number">
             </div>
           </div>
         </fieldset>
         <div class="submit-row">
-          <input type="submit" value="Save" class="btn btn-default" name="_save">
+          <input type="submit" value="Save" class="button" name="_save">
         </div>
       </div>
     </form>
   </div>
 </div>
 
-<a href='..' class = "btn btn-default">Go back</a>
+<a href='..' class = "logoutButton" align = "center">Go Back</a>
 
-</body>
-
-<style>
-body{
-    background-color: #2066ed;
-}
-</style>

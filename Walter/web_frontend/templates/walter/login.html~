@@ -1,14 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-</head>
-<body>
+{% load staticfiles %}
+<link rel = "stylesheet" type = "text/css" href = "{% static 'Walter/style.css' %}" />
 {% if added_message %}
   <p><strong>{{ added_message }}</strong></p>
 {% endif %}
@@ -38,12 +30,11 @@
           </div>
         </fieldset>
         <div class="submit-row">
-          <input type="submit" value="Login" class="default" name="_save">
+          <input type="submit" value="Login" class="button" name="_save">
         </div>
       </div>
     </form>
   </div>
 </div>
 
-<a href='../register' class = "btn btn-default">Register an account</a>
-</body>
+<a href='../register' class = "button">Register an account</a>

@@ -16,7 +16,7 @@ def index(request):
         return redirect('/walter/login')
 
     template = loader.get_template('walter/index.html')
-    context = {}
+    context = {'user': request.user}
     return HttpResponse(template.render(context, request))
 
 @login_required

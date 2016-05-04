@@ -1,0 +1,64 @@
+li a {
+    color: green;
+}
+body {
+    background-color: #208CBA;
+}
+
+tr{
+    font-size:xx-large;
+    color: white;
+    padding: 1% 1%;
+}
+
+td{
+    padding: 1% 1%;
+    width: 10%;
+}
+
+.button {
+    background-color: #4CAF50; /* Green */
+    border: 2px solid black;
+    color: white;
+    padding: 3% 3%;
+    width: 80%;
+    text-align: center;
+    text-decoration: none;
+    border-radius:10px;
+    display: inline-block;
+    font-size: xx-large;
+    margin: 2% 7%;
+}
+
+.button:hover {background-color: #232323;}
+
+.logoutButton{
+    background-color: #EEAF50; /* Green */
+    border: 2px solid black;
+    color: white;
+    padding: 3% 3%;
+    width: 40%;
+    text-align: center;
+    text-decoration: none;
+    border-radius:10px;
+    display: inline-block;
+    font-size: xx-large;
+    margin: 2% 7%;
+}
+
+.logoutButton:hover {background-color: #232323;}
+
+label{
+    color: black;
+    padding: 3% 3%;
+    font-size: xx-large;
+}
+
+input{
+font-size: x-large;
+padding: 1% 1%;
+}
+
+fieldset{
+    border: none;
+}
