@@ -2,7 +2,7 @@
 {% load staticfiles %}
 <link rel = "stylesheet" type = "text/css" href = "{% static 'Walter/style.css' %}" />
 {% if added_message %}
-  <p><strong>{{ added_message }}</strong></p>
+  <h1><strong>{{ added_message }}</strong></h1>
 {% endif %}
 
 {% if error_message %}
