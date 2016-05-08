@@ -30,3 +30,12 @@ class SugarTable(models.Model):
 
 def most_recent_reading(username):
      return SugarTable.objects.filter(username=username).latest('timestamp')
+
+
+class PhoneNumber(models.Model):
+    username = models.CharField(max_length=40)
+    number = models.CharField(max_length=12)
+    carrier = models.CharField(max_length=40)
+
+    def __str__(self):
+        return '[' + str(self.username) + ', ' + str(self.number) + ', ' + str(self.carrier) + ']'

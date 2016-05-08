@@ -2,18 +2,31 @@
 
 <link rel = "stylesheet" type = "text/css" href = "{% static 'Walter/style.css' %}" />
 
+{% if added_message %}
+  <h1><strong>{{ added_message }}</strong></h1>
+{% endif %}
+
 <h1 align = 'center'>Configure Your Account</h1>
 
-
-<form action="walter/phoneSubmission" method="post">
+<form action="/walter/configuration/" method="post">
   {% csrf_token %}
   <label>Phone Number:</label> <input type="phone" name="phone"><br>
-  <label>Phone Carrier: </label><input type="text" name="carrier"><br>
+  <label>Phone Carrier: </label>
+    <select name="carrier">
+      <option value="txt.att.net">AT&amp;T</option>
+      <option value="messaging.sprintpcs.com">Sprint</option>
+      <option value="tmomail.net">T-Mobile</option>
+      <option value="email.uscc.net">U. S. Cellular</option>
+      <option value="vtext.com">Verizon Wireless</option>
+      <option value="vmobl.com">Virgin Mobile</option>
+    </select>
   <input type = "submit" class="button" value="Add a Phone Number">
 </form>
 
-<label>Number to test:</label><input type="phone" name="test"><br>
-<a href = "Send-Text" class = "button">Send a Test Text</a><br>
-<a href = ".." class = "logoutButton">Go Back</a>
-
-
+<form action="/walter/Send-Text/" method="post">
+  {% csrf_token %}
+  <label>Number to test:</label>
+    <input type="phone" name="test">
+  <input type="submit" class = "button" value="Send a Test Text">
+</form>
+<a href = "/walter" class = "logoutButton">Go Back</a>

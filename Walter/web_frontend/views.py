@@ -5,9 +5,9 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-import re
+import re, smtplib, auth
 
-from .models import SugarTable
+from .models import *
 
 @login_required
 def index(request):
@@ -37,7 +37,21 @@ def configure(request):
         'user': user
     }
 
+    if request.method == 'POST':
+        post_data = request.POST
+
+        number = validate_phone_number(post_data['phone'])
+        carrier = post_data['carrier']
+
+        phone_number = PhoneNumber(username=user, number=number, carrier=carrier)
+        phone_number.save()
+
+        context['added_message'] = 'Added your phone number ' + post_data['phone'] + '. Test it below'
+
     return render(request, 'walter/configuration.html', context)
+
+def validate_phone_number(number):
+    return number
 
 @login_required
 def insert(request):
@@ -108,10 +122,27 @@ def signin(request):
     return render(request, 'walter/login.html', context)
 
 @login_required
-def textTest(request):
+def testText(request):
+    context = {
+        'added_message': "A text was sent to "
+    }
+
+    if request.method == 'POST':
+        post_data = request.POST
+
+        test_number = post_data['test']
+        number = PhoneNumber.objects.get(username=request.user, number=test_number)
+
+        send_mail(number.number, number.carrier)
         context = {
-            'added_message': "A text was sent to "
+            'added_message': 'A text was sent to ' + test_number
         }
 
-    return render(request, 'walter/configure.html', context)
+    return render(request, 'walter/configuration.html', context)
 
+def send_mail(number, carrier):
+    server = smtplib.SMTP("smtp.gmail.com", 587)
+    server.starttls()
+    server.login( auth.EMAIL_ADDRESS, auth.EMAIL_PASSWORD )
+
+    server.sendmail('From: Walter Project', number + '@' + carrier, 'This is a test text message!')
