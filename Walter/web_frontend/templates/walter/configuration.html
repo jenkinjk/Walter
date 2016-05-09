@@ -4,13 +4,14 @@
 
 <h1 align = 'center'>Configure Your Account</h1>
 
-
+<div class = "container">
 <form action="walter/phoneSubmission" method="post">
   {% csrf_token %}
   <label>Phone Number:</label> <input type="phone" name="phone"><br>
   <label>Phone Carrier: </label><input type="text" name="carrier"><br>
   <input type = "submit" class="button" value="Add a Phone Number">
 </form>
+</div>
 
 <label>Number to test:</label><input type="phone" name="test"><br>
 <a href = "Send-Text" class = "button">Send a Test Text</a><br>

@@ -10,7 +10,7 @@
 {% endif %}
 
 <div id="content" class="colM">
-  <h1>Login</h1>
+  <h1 align = "center">Login</h1>
   <div id="content-main">
     <form enctype="multipart/form-data" action="" method="post" id="register" novalidate="">
       {% csrf_token %}

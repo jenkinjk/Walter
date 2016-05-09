@@ -14,6 +14,6 @@
 
 <label>Number to test:</label><input type="phone" name="test"><br>
 <a href = "Send-Text" class = "button">Send a Test Text</a><br>
-<a href = "index" class = "logoutButton">Go Back</a>
+<a href = ".." class = "logoutButton">Go Back</a>
 
 
