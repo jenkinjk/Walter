@@ -6,14 +6,11 @@
   <h1><strong>{{ added_message }}</strong></h1>
 {% endif %}
 
-<<<<<<< HEAD
 <div class = "container">
-<form action="walter/phoneSubmission" method="post">
-=======
+
 <h1 align = 'center'>Configure Your Account</h1>
 
 <form action="/walter/configuration/" method="post">
->>>>>>> 11cc98667060dc930e6eea4c505b6ca81a769d92
   {% csrf_token %}
   <label>Phone Number:</label> <input type="phone" name="phone"><br>
   <label>Phone Carrier: </label>
