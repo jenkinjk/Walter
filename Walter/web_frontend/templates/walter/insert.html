@@ -9,9 +9,9 @@
   <p><strong>{{ error_message }}</strong></p>
 {% endif %}
 
-<div class = "container">
 <div id="content" class="colM">
   <h1 align = "center">Add Blood Sugar Reading</h1>
+  <a href='..' class = "logoutButton" align = "center">Go Back</a>
   <div id="content-main">
     <form enctype="multipart/form-data" action="" method="post" id="sugartable_form" novalidate="">
       {% csrf_token %}
@@ -31,7 +31,6 @@
     </form>
   </div>
 </div>
-</div>
 
-<a href='..' class = "logoutButton" align = "center">Go Back</a>
+
 

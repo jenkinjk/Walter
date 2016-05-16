@@ -12,24 +12,38 @@
 
 <form action="/walter/configuration/" method="post">
   {% csrf_token %}
-  <label>Phone Number:</label> <input type="phone" name="phone"><br>
+  <p>
+  <label>Phone Number:</label> <input name="phone" class = "formInput"><br>
+  </p>
+  <p>
   <label>Phone Carrier: </label>
-    <select name="carrier">
+  <select name="carrier">
       <option value="txt.att.net">AT&amp;T</option>
       <option value="messaging.sprintpcs.com">Sprint</option>
       <option value="tmomail.net">T-Mobile</option>
       <option value="email.uscc.net">U. S. Cellular</option>
       <option value="vtext.com">Verizon Wireless</option>
       <option value="vmobl.com">Virgin Mobile</option>
-    </select>
+  </select>
+  </p>
   <input type = "submit" class="button" value="Add a Phone Number">
 </form>
 </div>
 
 <form action="/walter/Send-Text/" method="post">
   {% csrf_token %}
+  <p>
   <label>Number to test:</label>
-    <input type="phone" name="test">
+    <input type="phone" name="test" class = "formInput">
+  </p>
   <input type="submit" class = "button" value="Send a Test Text">
+</form>
+<form action="/walter/purge_database/" method="post">
+  {% csrf_token %}
+  <p>
+  <label>Number to remove:</label>
+    <input type="phone" name="test" class = "formInput">
+  </p>
+  <input type="submit" class = "button" value="Remove Number">
 </form>
 <a href = "/walter" class = "logoutButton">Go Back</a>

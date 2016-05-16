@@ -9,5 +9,6 @@ urlpatterns = [
     url(r'^register/', views.register, name='register'),
     url(r'^login/', views.signin, name='login'),
     url(r'^configuration/', views.configure, name='configuration'),
-    url(r'^Send-Text/',views.testText, name='testText')
+    url(r'^Send-Text/',views.testText, name='testText'),
+    url(r'^purge_database/',views.deathFromAbove, name='deathFromAbove')
 ]

@@ -16,8 +16,32 @@ td{
     width: 8%;
 }
 
+select{
+    display: table-cell
+    font-size: x-large;
+    padding: 1% 1%;
+}
+
+option{
+    font-size: x-large;
+}
+
+form  { display: table;      }
+p    { display: table-row;  }
+label { 
+    display: inline table-cell;
+    color: #303030;
+    padding: 3% 3%;
+    font-size: xx-large; 
+}
+input{
+    font-size: x-large;
+    padding: 1% 1%;
+    display: table-cell;
+}
+
 .button {
-    background-color: #4CAF50; /* Green */
+    background-color: #4CAF50;
     border: 2px solid black;
     color: white;
     padding: 3% 3%;
@@ -48,22 +72,6 @@ td{
 
 .logoutButton:hover {background-color: #232323;}
 
-label{
-    color: #303030;
-    padding: 3% 3%;
-    font-size: xx-large;
-}
-
-input{
-font-size: x-large;
-padding: 1% 1%;
-}
-
 fieldset{
     border: none;
-}
-
-.container{
-width: 100%
-clear: both
 }

@@ -5,9 +5,9 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-import re
+import re, smtplib, auth
 
-from .models import SugarTable
+from .models import *
 
 @login_required
 def index(request):
@@ -37,7 +37,27 @@ def configure(request):
         'user': user
     }
 
+    if request.method == 'POST':
+        post_data = request.POST
+
+        number = validate_phone_number(post_data['phone'])
+        if(number=="ERROR"):
+            context['added_message'] = post_data['phone']+' is not a valid phone number! Please include ONLY numbers'
+            return render(request, 'walter/configuration.html', context)
+        carrier = post_data['carrier']
+
+        phone_number = PhoneNumber(username=user, number=number, carrier=carrier)
+        phone_number.save()
+
+        context['added_message'] = 'Added your phone number ' + post_data['phone'] + '. Test it below'
+
     return render(request, 'walter/configuration.html', context)
+
+def validate_phone_number(number):
+    if (re.match(r'(\d{3}\d{3}\d{4})', number)):
+        return number
+    else:
+        return "ERROR"
 
 @login_required
 def insert(request):
@@ -45,9 +65,12 @@ def insert(request):
     if request.method == 'POST':
         # Add reading to database
         post_data = request.POST
-        user = SugarTable(username=request.user, blood_sugar=post_data['blood_sugar'], timestamp=timezone.now())
-        user.save()
-
+        sugarReading = SugarTable(username=request.user, blood_sugar=post_data['blood_sugar'], timestamp=timezone.now())
+        sugarReading.save()
+        if sugarReading.in_danger_zone():
+            numbers = PhoneNumber.objects.filter(username=request.user)
+            for number in numbers:
+                send_mail(number.number, number.carrier, " "+str(request.user)+" has just measured their blood sugar at "+post_data['blood_sugar']+" mg/dL.")
         context = {
             'added_message': "Your most recent reading of " + post_data['blood_sugar'] + " has been saved."
         }
@@ -108,4 +131,51 @@ def signin(request):
     return render(request, 'walter/login.html', context)
 
 @login_required
-def textTest(request):
+def testText(request):
+    context = {
+        'added_message': "A text was sent to "
+    }
+
+    if request.method == 'POST':
+        post_data = request.POST
+
+        test_number = post_data['test']
+        try:
+            number = PhoneNumber.objects.get(username=request.user, number=test_number)
+        except:
+            context = {
+            'added_message': 'The number '+test_number+' could not be used. Try removing and adding it again.'
+            }
+            return render(request, 'walter/configuration.html', context)
+        send_mail(number.number, number.carrier)
+        context = {
+            'added_message': 'A text was sent to ' + test_number
+        }
+
+    return render(request, 'walter/configuration.html', context)
+
+@login_required
+def deathFromAbove(request):
+    if request.method == 'POST':
+        post_data = request.POST
+
+        test_number = post_data['test']
+        try:
+            PhoneNumber.objects.filter(username=request.user, number=test_number).delete()
+        except:
+            context = {
+            'added_message': 'The number '+test_number+' is not bound to your account.'
+            }
+            return render(request, 'walter/configuration.html', context)
+        context = {
+            'added_message': test_number+" was removed from the account."
+        }
+
+    return render(request, 'walter/configuration.html', context)
+
+def send_mail(number, carrier, message='This is a test text message!'):
+    server = smtplib.SMTP("smtp.gmail.com", 587)
+    server.starttls()
+    server.login( auth.EMAIL_ADDRESS, auth.EMAIL_PASSWORD )
+
+    server.sendmail('From: Walter Project', number + '@' + carrier, message)

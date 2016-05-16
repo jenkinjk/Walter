@@ -1,40 +1,33 @@
-li a {
-    color: green;
-}
 body {
     background-color: #208CBA;
 }
 
-tr{
-    font-size:xx-large;
-    color: white;
-    padding: 1% 1%;
-}
-
-td{
-    padding: 1% 1%;
-    width: 8%;
-}
 
 select{
     display: table-cell
     font-size: x-large;
     padding: 1% 1%;
+    horizontal-align:left;
 }
 
 option{
     font-size: x-large;
 }
 
-label { 
+form  { display: table;      }
+p    { display: table-row;  }
+form label { 
+    display: table-cell;
     color: #303030;
     padding: 3% 3%;
     font-size: xx-large; 
 }
-input{
+.forInput{
     font-size: x-large;
     padding: 1% 1%;
+    display: inline table-cell;
 }
+
 
 .button {
     background-color: #4CAF50;
@@ -68,6 +61,3 @@ input{
 
 .logoutButton:hover {background-color: #232323;}
 
-fieldset{
-    border: none;
-}

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 {% load staticfiles %}
 <link rel = "stylesheet" type = "text/css" href = "{% static 'Walter/style.css' %}" />
+<a href='..' class="logoutButton">Go back</a>
+<p style="font-size:x-large;color:white">To search your history hit ctrl+f and type in the desired date.</p>
 <table>
   <tr>
     <td>Blood Sugar</td>
@@ -9,10 +11,17 @@
 
   {% for sugar in user_info %}
     <tr>
-      <td>{{ sugar.blood_sugar }}</td>
+      {% if sugar.in_danger_zone %}
+        <td style = "background:RED">{{ sugar.blood_sugar }}</td>
+      {% elif not sugar.in_ideal_range %}
+        <td style = "background:ORANGE">{{ sugar.blood_sugar }}</td>
+      {% else %}
+        <td>{{ sugar.blood_sugar }}</td>
+      {% endif %}
+      
       <td>{{ sugar.timestamp }}</td>
     </tr>
   {% endfor %}
 
 </table>
-<a href='..' class="logoutButton">Go back</a>
+

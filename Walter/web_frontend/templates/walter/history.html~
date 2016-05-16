@@ -1,14 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-</head>
-<body>
+{% load staticfiles %}
+<link rel = "stylesheet" type = "text/css" href = "{% static 'Walter/style.css' %}" />
+<a href='..' class="logoutButton">Go back</a>
+<p style="font-size:xlarge;color:white">To search your history hit ctrl+f and type in the desired date.</p>
 <table>
   <tr>
     <td>Blood Sugar</td>
@@ -17,11 +11,17 @@
 
   {% for sugar in user_info %}
     <tr>
-      <td>{{ sugar.blood_sugar }}</td>
+      {% if sugar.in_danger_zone %}
+        <td style = "background:RED">{{ sugar.blood_sugar }}</td>
+      {% elif not sugar.in_ideal_range %}
+        <td style = "background:ORANGE">{{ sugar.blood_sugar }}</td>
+      {% else %}
+        <td>{{ sugar.blood_sugar }}</td>
+      {% endif %}
+      
       <td>{{ sugar.timestamp }}</td>
     </tr>
   {% endfor %}
 
 </table>
-<a href='..' class="logoutButton">Go back</a>
-</body>
+
