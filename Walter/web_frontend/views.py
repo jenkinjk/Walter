@@ -5,7 +5,10 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-import re, smtplib, auth
+import re, smtplib, auth, time
+from threading import Thread
+from email.MIMEMultipart import MIMEMultipart
+from email.MIMEText import MIMEText
 
 from .models import *
 
@@ -65,14 +68,26 @@ def insert(request):
     if request.method == 'POST':
         # Add reading to database
         post_data = request.POST
-        sugarReading = SugarTable(username=request.user, blood_sugar=post_data['blood_sugar'], timestamp=timezone.now())
+        blood_sugar_reading=post_data['blood_sugar']
+        sugarReading = SugarTable(username=request.user, blood_sugar=blood_sugar_reading, timestamp=timezone.now())
         sugarReading.save()
+
         if sugarReading.in_danger_zone():
             numbers = PhoneNumber.objects.filter(username=request.user)
+            attachedNumbers = ""
+            message = " "+str(request.user)+" has just measured their blood sugar at "+blood_sugar_reading+" mg/dL."
             for number in numbers:
-                send_mail(number.number, number.carrier, " "+str(request.user)+" has just measured their blood sugar at "+post_data['blood_sugar']+" mg/dL.")
+                attachedNumbers = attachedNumbers+number.number+"@"+number.carrier+','
+            attachedNumbers = attachedNumbers[:-1]
+            send_many_mail(str(request.user)+" has had an abnormal blood reading!",attachedNumbers, message)
+
+            context = {
+            'added_message': "Your most recent reading of " + blood_sugar_reading + " has been saved. Warning messages have been sent to the following numbers: "+attachedNumbers
+            }
+            return render(request, 'walter/insert.html', context)
+
         context = {
-            'added_message': "Your most recent reading of " + post_data['blood_sugar'] + " has been saved."
+            'added_message': "Your most recent reading of " + blood_sugar_reading + " has been saved."
         }
 
 
@@ -147,7 +162,7 @@ def testText(request):
             'added_message': 'The number '+test_number+' could not be used. Try removing and adding it again.'
             }
             return render(request, 'walter/configuration.html', context)
-        send_mail(number.number, number.carrier)
+        send_mail(number.number, number.carrier,'This is a test text message!')
         context = {
             'added_message': 'A text was sent to ' + test_number
         }
@@ -173,9 +188,25 @@ def deathFromAbove(request):
 
     return render(request, 'walter/configuration.html', context)
 
-def send_mail(number, carrier, message='This is a test text message!'):
+def send_many_mail(subject, numbers, message):
+    msg = MIMEMultipart()
+    msg["Subject"] = subject
+    msg["From"] = "walterproject2017@gmail.com"
+    msg["To"] = numbers
+    body = MIMEText(message)
+    msg.attach(body)
+
+    server = smtplib.SMTP("smtp.gmail.com", 587)
+    server.starttls()
+    server.login( auth.EMAIL_ADDRESS, auth.EMAIL_PASSWORD )
+
+    server.sendmail(msg["From"], msg["To"].split(","), msg.as_string())
+    server.quit()
+
+def send_mail(number, carrier, message):
     server = smtplib.SMTP("smtp.gmail.com", 587)
     server.starttls()
     server.login( auth.EMAIL_ADDRESS, auth.EMAIL_PASSWORD )
 
     server.sendmail('From: Walter Project', number + '@' + carrier, message)
+    server.quit()
